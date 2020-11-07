@@ -19,7 +19,6 @@ public class Demo2 {
         emp2.setName("jiang");
         emp2.setDept(dept);
         dept.setEmps(Arrays.asList(emp1, emp2));
-        String json = JSONObject
     }
 }
 
