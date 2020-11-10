@@ -264,3 +264,41 @@
   - 收集结束时会产生大量空间碎片
 
   ###### G1收集器
+
+- #### 内存分配与回收策略
+
+  给对象分配内存以及回收分配给对象的内存
+
+  - 大多数情况下，对象在牺牲带Eden区中分配，当Eden区没有足够的空间进行分配时，虚拟机将发起一次Minor GC。
+  - 大对象（需要大量连续内存空间的java对象）直接进入老年代（Serial、ParNew收集-XX:PretenureSizeThreshold设置）
+  - 长期存活的对象将进入老年代，虚拟机给每个对象定义了一个对象年龄计数器。MinGC后进入Survivor空间则将年龄设为1，并在Survivor空间达到-XX:MaxTenuringThreshold设置的年龄（默认15）后进入老年代
+  - 如果Survivor空间中相同的年龄所有对象大小的总和大于Survivor空间的一半，年龄大于或等于该年龄的对象就可以直接进入老年代。	
+
+
+- #### JDK命令行工具
+
+  ###### jps：虚拟机进程状况工具
+
+  jps [options] [hostid]   主要选项-q -m -l -v
+
+  ###### jstat：虚拟机统计信息监视工具
+
+  显示本地货远程虚拟机进程中的类装载、内存、垃圾收集、JIT编译等运行数据，运行期定位虚拟机性能问题的首选工具。
+
+  jstat [ option vmid [interval [s|ms] [count]] ]
+
+  ###### jinfo：Java配置信息工具
+
+  jinfo [option] pid
+
+  ###### jmap：java内存映像工具
+
+  用于生成堆转储快照（称为heapdump或dump）及查询finalize执行队列、堆详细信息
+
+  ###### jhat：虚拟机堆转储快照分析工具
+
+  ###### jstack：java堆栈跟踪工具
+
+  ###### jconsole：java监视与管理控制台
+
+  ###### VisualVm：多合一故障处理工具
